@@ -45,3 +45,5 @@
 /SyscallWrite.class
 /Tone.class
 /ToneGenerator.class
+/Fork.class
+/ChangeProcess.class

@@ -1,5 +1,3 @@
-// Editado Rodolfo
-
 package mars.mips.instructions.syscalls;
 
 import mars.ProcessingException;

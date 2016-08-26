@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class TableProcessors {
 	
-	//processo que está executanto
+	//processo que está executando
 	private String pidExec;
 	//Todos os processos
 	private HashMap<String,ProcessControlBlock> PCBTable;
@@ -55,15 +55,18 @@ public class TableProcessors {
 	}
 	
 	public void addPCB(ProcessControlBlock pcb){
+		System.out.println(pcb.getPid() + " " + pcb.getPc() + " " + pcb.getRegisters()[4].getValue());
 		PCBTable.put(pcb.getPid(), pcb);
+		ReadyTable.add(pcb.getPid());
+	}
+
+	public void processChange(String pidE) {
+		setPidExec(pidE);
+		ReadyTable.remove(pidE);
 	}
 	
-	public boolean addReadyTable(String pid){
-		return ReadyTable.add(pid);
-	}
-	
-	public boolean addBlockedTable(String pid){
-		return BlockedTable.add(pid);
+	public ProcessControlBlock getPcbExec(){
+		return PCBTable.get(pidExec);
 	}
 
 }
