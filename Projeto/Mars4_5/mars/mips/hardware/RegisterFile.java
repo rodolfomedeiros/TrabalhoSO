@@ -1,6 +1,7 @@
    package mars.mips.hardware;
 
-   import java.util.Observer;
+   import java.util.ArrayList;
+import java.util.Observer;
 
    import mars.Globals;
    import mars.assembler.SymbolTable;
@@ -70,6 +71,34 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       private static Register hi= new Register("hi", 33, 0);//this is an internal register with arbitrary number
       private static Register lo= new Register("lo", 34, 0);// this is an internal register with arbitrary number
    		 
+      
+      /** 
+       * Novos métodos inseridos
+       *  -----  PluginRJ ------
+       */
+      
+      public static void setHi(int value){
+    	  hi.setValue(value);
+      }
+      
+      public static void setLo(int value){
+    	  lo.setValue(value);
+      }
+      
+      public static ArrayList<Register> getRegistersArray(){
+    	  ArrayList<Register> a = new ArrayList<Register>(31);
+    	  
+    	  for(int i = 0; i < regFile.length; i++){
+    		 a.add(regFile[i]);
+    	  }
+    	  
+    	  return a;
+      }
+      
+      public static void setRegisters(Register[] reg){
+    	  regFile = reg;
+      }
+      
    
    	/**
    	  *  Method for displaying the register values for debugging.
@@ -180,7 +209,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  *   @return The set of registers.
    	  **/
    	
-       public static Register[] getRegisters(){
+      public static Register[] getRegisters(){
          return regFile;
       }
       

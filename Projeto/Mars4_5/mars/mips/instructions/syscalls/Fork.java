@@ -13,7 +13,7 @@ public class Fork extends AbstractSyscall{
 
 	@Override
 	public void simulate(ProgramStatement statement) throws ProcessingException {
-		ManagerProcessors.createProcess(	RegisterFile.getRegisters(),
+		ManagerProcessors.createProcess(	RegisterFile.getRegistersArray(),
 											RegisterFile.getValue(33),
 											RegisterFile.getValue(34),
 											RegisterFile.getValue(4)

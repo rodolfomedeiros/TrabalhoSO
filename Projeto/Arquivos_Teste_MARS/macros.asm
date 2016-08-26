@@ -11,6 +11,11 @@
 	syscall
 .end_macro
 
+.macro processChange
+	li $v0, 20
+	syscall
+.end_macro
+
 # Imprime inteiro
 .macro print_int(%reg)
 	add $a0, %reg, $zero  #copiando o valor de reg. para $a0

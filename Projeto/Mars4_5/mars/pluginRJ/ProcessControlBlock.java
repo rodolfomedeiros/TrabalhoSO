@@ -1,10 +1,12 @@
 package mars.pluginRJ;
 
+import java.util.ArrayList;
+
 import mars.mips.hardware.Register;
 
 public class ProcessControlBlock {
 	
-	private Register[] registers;
+	private ArrayList<Register> registers;
 	private int hi;
 	private int lo;
 	private int pc;
@@ -12,7 +14,7 @@ public class ProcessControlBlock {
 	private StateEnum state;
 	
 	//constructor
-	public ProcessControlBlock(int pid, int hi, int lo, int pc, Register [] reg){
+	public ProcessControlBlock(int pid, int hi, int lo, int pc, ArrayList<Register> reg){
 		setPid(String.valueOf(pid));
 		setHi(hi);
 		setLo(lo);
@@ -20,11 +22,11 @@ public class ProcessControlBlock {
 		setRegisters(reg);
 	}
 	
-	public Register[] getRegisters() {
+	public ArrayList<Register> getRegisters() {
 		return registers;
 	}
 
-	public void setRegisters(Register[] registers) {
+	public void setRegisters(ArrayList<Register> registers) {
 		this.registers = registers;
 	}
 

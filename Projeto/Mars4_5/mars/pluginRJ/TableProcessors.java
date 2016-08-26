@@ -55,12 +55,12 @@ public class TableProcessors {
 	}
 	
 	public void addPCB(ProcessControlBlock pcb){
-		System.out.println(pcb.getPid() + " " + pcb.getPc() + " " + pcb.getRegisters()[4].getValue());
 		PCBTable.put(pcb.getPid(), pcb);
 		ReadyTable.add(pcb.getPid());
 	}
 
 	public void processChange(String pidE) {
+		ReadyTable.addLast(getPidExec());		
 		setPidExec(pidE);
 		ReadyTable.remove(pidE);
 	}

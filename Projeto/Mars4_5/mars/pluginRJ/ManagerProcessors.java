@@ -1,5 +1,7 @@
 package mars.pluginRJ;
 
+import java.util.ArrayList;
+
 import mars.mips.hardware.Register;
 
 public class ManagerProcessors {
@@ -31,7 +33,7 @@ public class ManagerProcessors {
 		ManagerProcessors.escalonador = escalonador;
 	}
 
-	public static void createProcess(Register[] reg, int hi, int lo, int pc) {
+	public static void createProcess(ArrayList<Register> reg, int hi, int lo, int pc) {
 		//adiciona pcb na tabela
 		tableERB.addPCB(new ProcessControlBlock(++pidId, hi, lo, pc, reg));
 	}
@@ -39,7 +41,7 @@ public class ManagerProcessors {
 	public static ProcessControlBlock processChange(){
 		String pidE = escalonador.algoritmQueue(tableERB.getReadyTable());
 		tableERB.processChange(pidE);
-		return tableERB.getPCBTable().get(pidE);
+		return tableERB.getPcbExec();
 	}
 	
 }
