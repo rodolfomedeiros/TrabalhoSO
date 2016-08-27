@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import mars.mips.hardware.Register;
+
 public class TableProcessors {
 	
 	//processo que está executando
@@ -54,19 +56,27 @@ public class TableProcessors {
 		BlockedTable = blockedTable;
 	}
 	
+	//adiciona pcb na tabela de processos
 	public void addPCB(ProcessControlBlock pcb){
 		PCBTable.put(pcb.getPid(), pcb);
 		ReadyTable.add(pcb.getPid());
 	}
 
-	public void processChange(String pidE) {
-		ReadyTable.addLast(getPidExec());		
-		setPidExec(pidE);
-		ReadyTable.remove(pidE);
+	public void processChange() {
+		String pidE = ReadyTable.removeFirst();
+		ReadyTable.add(pidExec);		
+		pidExec = pidE;
 	}
 	
 	public ProcessControlBlock getPcbExec(){
-		return PCBTable.get(pidExec);
+		return PCBTable.remove(pidExec);
+	}
+
+	public boolean updatePCB(int hi, int lo, int pc, ArrayList<Register> reg){
+		if(!pidExec.equals("")){
+			PCBTable.put(pidExec, new ProcessControlBlock(Integer.valueOf(pidExec), hi, lo, pc, reg));
+		}
+		return true;
 	}
 
 }

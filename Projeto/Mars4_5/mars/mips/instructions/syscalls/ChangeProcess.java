@@ -15,11 +15,17 @@ public class ChangeProcess extends AbstractSyscall{
 
 	@Override
 	public void simulate(ProgramStatement statement) throws ProcessingException {
-		ProcessControlBlock pcb = ManagerProcessors.processChange();
+		
+		//os argumentos são para guarda o estado do processo a ser mudado, o retorno é o novo processo é que irá utilizar a cpu
+		ProcessControlBlock pcb = ManagerProcessors.processChange(	RegisterFile.getValue(33), 
+																	RegisterFile.getValue(34),
+																	RegisterFile.getProgramCounter(),
+																	RegisterFile.getRegistersArray());
 		
 		for(Register i : pcb.getRegisters()){
 			RegisterFile.updateRegister(i.getNumber(), i.getValue());
 		}
+		
 		RegisterFile.setProgramCounter(pcb.getPc());
 		RegisterFile.setHi(pcb.getHi());
 		RegisterFile.setLo(pcb.getLo());
