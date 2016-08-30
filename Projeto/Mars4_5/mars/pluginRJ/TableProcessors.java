@@ -64,7 +64,9 @@ public class TableProcessors {
 
 	public void processChange() {
 		String pidE = ReadyTable.removeFirst();
-		ReadyTable.add(pidExec);		
+		if(!pidExec.equals("")){
+			ReadyTable.add(pidExec);
+		}	
 		pidExec = pidE;
 	}
 	
