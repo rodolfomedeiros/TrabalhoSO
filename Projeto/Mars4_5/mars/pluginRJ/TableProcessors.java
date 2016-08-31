@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import mars.mips.hardware.Register;
-
 public class TableProcessors {
 	
 	//processo que está executando

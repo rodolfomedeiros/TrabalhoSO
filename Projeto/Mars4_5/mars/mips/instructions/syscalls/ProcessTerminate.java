@@ -3,7 +3,7 @@ package mars.mips.instructions.syscalls;
 import mars.ProcessingException;
 import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
-import mars.pluginRJ.ManagerProcessors;
+import mars.pluginRJ.ProcessManager;
 import mars.pluginRJ.OutputDebug;
 import mars.pluginRJ.ProcessControlBlock;
 
@@ -15,7 +15,7 @@ public class ProcessTerminate extends AbstractSyscall{
 
 	@Override
 	public void simulate(ProgramStatement statement) throws ProcessingException {
-		ProcessControlBlock pcb = ManagerProcessors.processTerminate();
+		ProcessControlBlock pcb = ProcessManager.processTerminate();
 		
 		
 		

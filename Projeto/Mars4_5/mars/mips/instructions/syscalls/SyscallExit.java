@@ -1,7 +1,7 @@
    package mars.mips.instructions.syscalls;
    import mars.util.*;
    import mars.*;
-import mars.pluginRJ.ManagerProcessors;
+import mars.pluginRJ.ProcessManager;
 import mars.pluginRJ.TableProcessors;
 
 /*
@@ -51,7 +51,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    * Performs syscall function to exit the MIPS program.
    */
       public void simulate(ProgramStatement statement) throws ProcessingException {
-    	  ManagerProcessors.setTableERB(new TableProcessors());
+    	  ProcessManager.setTableERB(new TableProcessors());
     	  throw new ProcessingException();  // empty exception list.
       }
    }

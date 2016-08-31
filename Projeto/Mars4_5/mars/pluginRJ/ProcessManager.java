@@ -1,6 +1,6 @@
 package mars.pluginRJ;
 
-public class ManagerProcessors {
+public class ProcessManager {
 	
 	public static int pidId = 0;
 	//tabelas

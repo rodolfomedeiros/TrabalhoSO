@@ -3,7 +3,7 @@ package mars.mips.instructions.syscalls;
 import mars.ProcessingException;
 import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
-import mars.pluginRJ.ManagerProcessors;
+import mars.pluginRJ.ProcessManager;
 import mars.pluginRJ.OutputDebug;
 import mars.pluginRJ.ProcessControlBlock;
 
@@ -17,7 +17,7 @@ public class ProcessChange extends AbstractSyscall{
 	public void simulate(ProgramStatement statement) throws ProcessingException {
 		
 		//os argumentos são para guarda o estado do processo a ser mudado, o retorno é o novo processo é que irá utilizar a cpu
-		ProcessControlBlock pcb = ManagerProcessors.processChange(	RegisterFile.getRegsValue(), 
+		ProcessControlBlock pcb = ProcessManager.processChange(		RegisterFile.getRegsValue(), 
 																	RegisterFile.getProgramCounter(),
 																	RegisterFile.getValue(33),
 																	RegisterFile.getValue(34));
