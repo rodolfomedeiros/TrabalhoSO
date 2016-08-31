@@ -1,6 +1,8 @@
    package mars.mips.instructions.syscalls;
    import mars.util.*;
    import mars.*;
+import mars.pluginRJ.ManagerProcessors;
+import mars.pluginRJ.TableProcessors;
 
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -48,7 +50,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    /**
    * Performs syscall function to exit the MIPS program.
    */
-       public void simulate(ProgramStatement statement) throws ProcessingException {
-         throw new ProcessingException();  // empty exception list.
+      public void simulate(ProgramStatement statement) throws ProcessingException {
+    	  ManagerProcessors.setTableERB(new TableProcessors());
+    	  throw new ProcessingException();  // empty exception list.
       }
    }

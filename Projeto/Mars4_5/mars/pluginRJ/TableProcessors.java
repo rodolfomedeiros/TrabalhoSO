@@ -56,6 +56,13 @@ public class TableProcessors {
 		BlockedTable = blockedTable;
 	}
 	
+	public ProcessControlBlock getPcbExec(){
+		if(!pidExec.equals("")){
+			return PCBTable.remove(pidExec);
+		}
+		return null;
+	}
+	
 	//adiciona pcb na tabela de processos
 	public void addPCB(ProcessControlBlock pcb){
 		PCBTable.put(pcb.getPid(), pcb);
@@ -63,15 +70,11 @@ public class TableProcessors {
 	}
 
 	public void processChange() {
-		String pidE = ReadyTable.removeFirst();
+		String pidE = scherdulerAlgoritmQueue();
 		if(!pidExec.equals("")){
 			ReadyTable.add(pidExec);
 		}	
 		pidExec = pidE;
-	}
-	
-	public ProcessControlBlock getPcbExec(){
-		return PCBTable.remove(pidExec);
 	}
 
 	public boolean updatePCB(int hi, int lo, int pc, ArrayList<Register> reg){
@@ -79,6 +82,22 @@ public class TableProcessors {
 			PCBTable.put(pidExec, new ProcessControlBlock(Integer.valueOf(pidExec), hi, lo, pc, reg));
 		}
 		return true;
+	}
+
+	public boolean finalizeProcess(){
+		pidExec = scherdulerAlgoritmQueue();
+		return true;
+	}	
+	
+	/*
+	 * Algoritmos do escalonador
+	 */
+
+	public String scherdulerAlgoritmQueue(){
+		if(!ReadyTable.isEmpty()){
+			return ReadyTable.removeFirst();
+		}
+		return "";
 	}
 
 }

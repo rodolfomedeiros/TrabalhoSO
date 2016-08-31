@@ -11,7 +11,6 @@ public class ProcessControlBlock {
 	private int lo;
 	private int pc;
 	private String pid;
-	private StateEnum state;
 	
 	//constructor
 	public ProcessControlBlock(int pid, int hi, int lo, int pc, ArrayList<Register> reg){
@@ -60,14 +59,6 @@ public class ProcessControlBlock {
 
 	public void setPid(String pid) {
 		this.pid = pid;
-	}
-
-	public StateEnum getState() {
-		return state;
-	}
-
-	public void setState(StateEnum state) {
-		this.state = state;
 	}
 	
 }

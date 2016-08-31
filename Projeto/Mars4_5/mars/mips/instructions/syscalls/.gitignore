@@ -47,3 +47,5 @@
 /ToneGenerator.class
 /Fork.class
 /ChangeProcess.class
+/ProcessChange.class
+/ProcessTerminate.class

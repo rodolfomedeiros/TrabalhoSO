@@ -5,12 +5,13 @@ import mars.ProgramStatement;
 import mars.mips.hardware.Register;
 import mars.mips.hardware.RegisterFile;
 import mars.pluginRJ.ManagerProcessors;
+import mars.pluginRJ.OutputDebug;
 import mars.pluginRJ.ProcessControlBlock;
 
-public class ChangeProcess extends AbstractSyscall{
+public class ProcessChange extends AbstractSyscall{
 
-	public ChangeProcess() {
-		super(20, "ChangeProcess");
+	public ProcessChange() {
+		super(20, "ProcessChange");
 	}
 
 	@Override
@@ -21,6 +22,8 @@ public class ChangeProcess extends AbstractSyscall{
 																	RegisterFile.getValue(34),
 																	RegisterFile.getProgramCounter(),
 																	RegisterFile.getRegistersArray());
+		//debug
+		OutputDebug.odProcessChange(pcb);
 		
 		for(Register i : pcb.getRegisters()){
 			RegisterFile.updateRegister(i.getNumber(), i.getValue());
