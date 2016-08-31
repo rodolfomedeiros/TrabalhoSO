@@ -1,10 +1,5 @@
 package mars.pluginRJ;
 
-import java.util.ArrayList;
-
-import mars.mips.hardware.Register;
-import mars.mips.hardware.RegisterFile;
-
 public class ManagerProcessors {
 	
 	public static int pidId = 0;
@@ -19,13 +14,13 @@ public class ManagerProcessors {
 		tableERB = table;
 	}
 
-	public static void createProcess(ArrayList<Register> reg, int hi, int lo, int pc) {
+	public static void createProcess(int[] regValue, int pc , int hi, int lo) {
 		//adiciona pcb na tabela
-		tableERB.addPCB(new ProcessControlBlock(++pidId, hi, lo, pc, reg));
+		tableERB.addPCB(new ProcessControlBlock(++pidId, regValue, pc, hi, lo));
 	}
 	
-	public static ProcessControlBlock processChange(int hi, int lo, int pc, ArrayList<Register> reg){
-		if(tableERB.updatePCB(RegisterFile.getValue(33), RegisterFile.getValue(34), RegisterFile.getProgramCounter(), RegisterFile.getRegistersArray())){
+	public static ProcessControlBlock processChange(int[] regValue, int pc , int hi, int lo){
+		if(tableERB.updatePCB(regValue, pc, hi, lo)){
 			tableERB.processChange();
 			return tableERB.getPcbExec();
 		}else return null;

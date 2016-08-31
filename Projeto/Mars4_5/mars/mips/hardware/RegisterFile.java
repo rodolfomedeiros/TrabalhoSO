@@ -1,7 +1,6 @@
    package mars.mips.hardware;
 
-   import java.util.ArrayList;
-import java.util.Observer;
+   import java.util.Observer;
 
    import mars.Globals;
    import mars.assembler.SymbolTable;
@@ -85,14 +84,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     	  lo.setValue(value);
       }
       
-      public static ArrayList<Register> getRegistersArray(){
-    	  ArrayList<Register> a = new ArrayList<Register>(31);
+      public static int[] getRegsValue(){
+    	  int regValue[] = new int[32];
     	  
-    	  for(int i = 0; i < regFile.length; i++){
-    		 a.add(regFile[i]);
+    	  //registradores normais
+    	  for(int i = 0; i < 32; i++){
+    		 regValue[i] = regFile[i].getValue();
     	  }
     	  
-    	  return a;
+    	  return regValue;
       }
       
       public static void setRegisters(Register[] reg){

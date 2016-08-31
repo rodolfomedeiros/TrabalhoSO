@@ -2,7 +2,6 @@ package mars.mips.instructions.syscalls;
 
 import mars.ProcessingException;
 import mars.ProgramStatement;
-import mars.mips.hardware.Register;
 import mars.mips.hardware.RegisterFile;
 import mars.pluginRJ.ManagerProcessors;
 import mars.pluginRJ.OutputDebug;
@@ -18,14 +17,15 @@ public class ProcessTerminate extends AbstractSyscall{
 	public void simulate(ProgramStatement statement) throws ProcessingException {
 		ProcessControlBlock pcb = ManagerProcessors.processTerminate();
 		
-		//debug
-		OutputDebug.odProcessChange(pcb);
+		
 		
 		if(pcb != null){
-			for(Register i : pcb.getRegisters()){
-				RegisterFile.updateRegister(i.getNumber(), i.getValue());
-			}
+			//debug
+			OutputDebug.odProcessChange(pcb);
 			
+			for(int i = 0; i < 32; i++){
+				RegisterFile.updateRegister(i, pcb.getValueReg(i));
+			}
 			RegisterFile.setProgramCounter(pcb.getPc());
 			RegisterFile.setHi(pcb.getHi());
 			RegisterFile.setLo(pcb.getLo());

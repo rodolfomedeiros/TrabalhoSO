@@ -77,9 +77,9 @@ public class TableProcessors {
 		pidExec = pidE;
 	}
 
-	public boolean updatePCB(int hi, int lo, int pc, ArrayList<Register> reg){
+	public boolean updatePCB(int[] regValue, int pc , int hi, int lo){
 		if(!pidExec.equals("")){
-			PCBTable.put(pidExec, new ProcessControlBlock(Integer.valueOf(pidExec), hi, lo, pc, reg));
+			PCBTable.put(pidExec, new ProcessControlBlock(Integer.valueOf(pidExec), regValue, pc, hi, lo));
 		}
 		return true;
 	}

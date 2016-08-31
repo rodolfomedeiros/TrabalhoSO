@@ -1,14 +1,13 @@
 package mars.pluginRJ;
 
-import mars.mips.hardware.Register;
 import mars.util.SystemIO;
 
 public class OutputDebug {
 	public static void odProcessChange(ProcessControlBlock pcb){
 		SystemIO.printString("Output PCB -> " + pcb.getPid());
 		SystemIO.printString("\n -- Registradores -- ");
-		for(Register p : pcb.getRegisters()){
-			SystemIO.printString("\n "+p.getName()+": " + p.getValue());
+		for(int i = 0; i < 32; i++){
+			SystemIO.printString("\n RegNum "+i+": "+pcb.getValueReg(i));
 		}
 		SystemIO.printString("\n pc: " + pcb.getPc());
 		SystemIO.printString("\n hi: " + pcb.getHi());
