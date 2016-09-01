@@ -54,6 +54,9 @@ public class TableProcessors {
 		BlockedTable = blockedTable;
 	}
 	
+	/**
+	 * @return retorna o processo que está executando.
+	 */
 	public ProcessControlBlock getPcbExec(){
 		if(!pidExec.equals("")){
 			return PCBTable.remove(pidExec);
@@ -61,7 +64,9 @@ public class TableProcessors {
 		return null;
 	}
 	
-	//adiciona pcb na tabela de processos
+	/**
+	 * @param adiciona o novo processo na tabela.
+	 */
 	public void addPCB(ProcessControlBlock pcb){
 		PCBTable.put(pcb.getPid(), pcb);
 		ReadyTable.add(pcb.getPid());
@@ -75,22 +80,37 @@ public class TableProcessors {
 		pidExec = pidE;
 	}
 
+	/**
+	 * Guarda o estado do processo que estava executando.
+	 * 
+	 * @param regValue
+	 * @param pc
+	 * @param hi
+	 * @param lo
+	 * @return
+	 */
+	
 	public boolean updatePCB(int[] regValue, int pc , int hi, int lo){
 		if(!pidExec.equals("")){
 			PCBTable.put(pidExec, new ProcessControlBlock(Integer.valueOf(pidExec), regValue, pc, hi, lo));
 		}
 		return true;
 	}
+	
+	/**
+	 * basicamente modifica o processo que esta executando
+	 * 
+	 * @return
+	 */
 
 	public boolean finalizeProcess(){
 		pidExec = scherdulerAlgoritmQueue();
 		return true;
 	}	
 	
-	/*
-	 * Algoritmos do escalonador
+	/**
+	 * Um algoritmo simples do escalonador, pega o primeiro da fila e informa ao despachante para ser executado.
 	 */
-
 	public String scherdulerAlgoritmQueue(){
 		if(!ReadyTable.isEmpty()){
 			return ReadyTable.removeFirst();
