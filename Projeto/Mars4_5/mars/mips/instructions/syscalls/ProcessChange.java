@@ -21,11 +21,11 @@ public class ProcessChange extends AbstractSyscall{
 																	RegisterFile.getProgramCounter(),
 																	RegisterFile.getValue(33),
 																	RegisterFile.getValue(34));
-		
+		//atualização do processo no registradores
 		if(pcb != null){
 			if(!pcb.isNull()){
 				//debug
-				OutputDebug.odProcessChange(pcb);
+				//OutputDebug.odProcessChange(pcb);
 			
 				for(int i = 0; i < 32; i++){
 					RegisterFile.updateRegister(i, pcb.getValueReg(i));
