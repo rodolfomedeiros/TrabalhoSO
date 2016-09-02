@@ -16,6 +16,7 @@ public class ProcessTerminate extends AbstractSyscall{
 
 	@Override
 	public void simulate(ProgramStatement statement) throws ProcessingException {
+		
 		ProcessControlBlock pcb = ProcessManager.processTerminate();
 		
 		//se existe algum processo para ser executado, as informações será adicionada nos registradores
@@ -29,8 +30,9 @@ public class ProcessTerminate extends AbstractSyscall{
 			RegisterFile.setProgramCounter(pcb.getPc());
 			RegisterFile.setHi(pcb.getHi());
 			RegisterFile.setLo(pcb.getLo());
+			SystemIO.printString("\n\n********* Pocesso: p" + pcb.getPid() + " Entrando no processador:\n");
 		}else{
-			SystemIO.printString("Não possui mais nenhum processo para ser executado! Finalizando...");
+			SystemIO.printString("N�o possui mais nenhum processo para ser executado! Finalizando...");
 			new SyscallExit();
 		}
 	}

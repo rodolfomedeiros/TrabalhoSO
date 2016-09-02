@@ -10,11 +10,22 @@ public class ProcessControlBlock {
 	
 	//constructor
 	public ProcessControlBlock(int pid, int[] regValue, int pc, int hi, int lo){
+		
+		
+		// Seta os valores do pid; dos registradores; do pc; do hi e do lo
+		
 		setPid(String.valueOf(pid));
 		setRegisters(regValue);
 		setPc(pc);
-		setHi(hi);
+		
+		/**************** Não são usados nesse trabahlo************/
+		
+		setHi(hi); 
 		setLo(lo);
+		
+		
+		/***********************************************************/
+	
 	}
 	
 	public int[] getRegsValue() {

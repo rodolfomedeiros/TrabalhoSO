@@ -13,10 +13,18 @@ public class Fork extends AbstractSyscall{
 
 	@Override
 	public void simulate(ProgramStatement statement) throws ProcessingException {
-		ProcessManager.createProcess(	null,
-										RegisterFile.getValue(4),
-										0,
-										0
-									);
+		
+		/****************** Criando o processo ******************************************
+		
+		Classe ProcessManager Gerencia os processos
+		
+			método createProcess(<Valor dos registradores>, pc, hi, lo)
+		
+			<Valor dos registradores> = Null -> Processo está sendo criado, então seus registradores não tem valor nenhum
+			
+			
+		*/
+		ProcessManager.createProcess(null, RegisterFile.getValue(4), 0,	0);
+	
 	}
 }

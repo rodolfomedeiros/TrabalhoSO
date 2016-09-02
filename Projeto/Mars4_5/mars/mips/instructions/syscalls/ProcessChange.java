@@ -4,6 +4,7 @@ import mars.ProcessingException;
 import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
 import mars.pluginRJ.ProcessManager;
+import mars.util.SystemIO;
 import mars.pluginRJ.OutputDebug;
 import mars.pluginRJ.ProcessControlBlock;
 
@@ -15,14 +16,20 @@ public class ProcessChange extends AbstractSyscall{
 
 	@Override
 	public void simulate(ProgramStatement statement) throws ProcessingException {
+	
+		/** 
+		  Argumentos usados para gerenciar o contexto dos processos 
+		 
+		 * */
 		
-		//os argumentos s√£o para guarda o estado do processo a ser mudado, o retorno √© o novo processo √© que ir√° utilizar a cpu
-		ProcessControlBlock pcb = ProcessManager.processChange(		RegisterFile.getRegsValue(), 
-																	RegisterFile.getProgramCounter(),
-																	RegisterFile.getValue(33),
-																	RegisterFile.getValue(34));
+		ProcessControlBlock pcb = ProcessManager.processChange(RegisterFile.getRegsValue(),	RegisterFile.getProgramCounter(), RegisterFile.getValue(33), RegisterFile.getValue(34));
+		
 		//atualiza√ß√£o do processo no registradores
+		
+		// Caso n„o exista processos pcb vai ser nulo.
 		if(pcb != null){
+			
+			// Caso seja a primeira vez rodando o processo, n„o h· informaÁıe para serem atualizadas
 			if(!pcb.isNull()){
 				//debug
 				//OutputDebug.odProcessChange(pcb);
@@ -30,11 +37,14 @@ public class ProcessChange extends AbstractSyscall{
 				for(int i = 0; i < 32; i++){
 					RegisterFile.updateRegister(i, pcb.getValueReg(i));
 				}
+				
 				RegisterFile.setHi(pcb.getHi());
 				RegisterFile.setLo(pcb.getLo());
 			}
 		
-			RegisterFile.setProgramCounter(pcb.getPc());			
-		}
+			RegisterFile.setProgramCounter(pcb.getPc());
+			
+			SystemIO.printString("\n\n********* Pocesso: p" + pcb.getPid() + " Entrando no processador:\n");
+		} 
 	}
 }
