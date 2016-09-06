@@ -27,7 +27,7 @@ P3:
 	loop3: addi $s0, $s0, -1
 	processChange
 	bnez $s0, loop3
-	
-	done
+	processTerminate
+	#done
       
       

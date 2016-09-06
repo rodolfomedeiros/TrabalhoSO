@@ -1,8 +1,5 @@
    package mars.mips.instructions.syscalls;
-   import mars.util.*;
    import mars.*;
-import mars.pluginRJ.ProcessManager;
-import mars.pluginRJ.TableProcessors;
 
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar

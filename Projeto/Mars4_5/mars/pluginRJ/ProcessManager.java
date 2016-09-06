@@ -26,14 +26,12 @@ public class ProcessManager {
 	 * @return retorna um processo que irá executar.
 	 */
 	public static ProcessControlBlock processChange(int[] regValue, int pc , int hi, int lo){
-		
 		if(tableERB.updatePCB(regValue, pc, hi, lo)) {
 			tableERB.processChange();
-
 			return tableERB.getPcbExec();
-		} else{
-			return null;
 		}
+		
+		return null;
 	}
 	
 	/**

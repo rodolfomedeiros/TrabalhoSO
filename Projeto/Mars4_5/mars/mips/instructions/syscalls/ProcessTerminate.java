@@ -28,8 +28,8 @@ public class ProcessTerminate extends AbstractSyscall{
 			RegisterFile.setLo(pcb.getLo());
 			SystemIO.printString("\n\n********* Pocesso: p" + pcb.getPid() + " Entrando no processador:\n");
 		}else{
-			SystemIO.printString("Nao possui mais nenhum processo para ser executado! Finalizando...");
-			//new SyscallExit();
+			SystemIO.printString("\n\n **** Nao possui mais nenhum processo para ser executado! Finalizando... **** \n\n");
+			throw new ProcessingException();
 		}
 	}
 }

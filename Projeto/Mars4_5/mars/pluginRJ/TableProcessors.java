@@ -113,26 +113,20 @@ public class TableProcessors {
 		String pidE = scherdulerAlgoritmQueue();
 		
 		/**
-		  
 		  Verifica e o retorno foi diferente vazio
 		  
 		  se sim:
 		  	adiciona o pid do processo que vai sair do processador
 		  	e o coloca na fila de pronto
-		  
-		  sen�o:
+		  senao:
 		  	coloca o processo direto para ser executado
-		  
-		  
 		 */
 		
-		if(!pidExec.equals("")){
+		if(!pidExec.equals("") && !pidE.equals("")){
 			ReadyTable.add(pidExec);
-		}	
-
+		}
+		
 		pidExec = pidE;
-		
-		
 	}
 
 	/**
@@ -146,22 +140,16 @@ public class TableProcessors {
 	 */
 	
 	public boolean updatePCB(int[] regValue, int pc , int hi, int lo){
-		
 		/** 
-		  
-		 	Verifica se o pidExec � vario, ou seja, se t�m algum processo executando
-		  	Se ele n�o for vazio, deve-se armazenar o contexto do processo 
-		 
+		 	Verifica se o pidExec é vazio, ou seja, se tem algum processo executando
+		  	Se ele nao for vazio, deve-se armazenar o contexto do processo 
 		 */
 		
 		if(!pidExec.equals("")){
-			
 			// Atualiza informa��es na tabela que cont�m todos os registradores
-			
 			PCBTable.put(pidExec, new ProcessControlBlock(Integer.valueOf(pidExec), regValue, pc, hi, lo));
 			SystemIO.printString("********* Pocesso: p" + pidExec + " Saindo do processador:\n"
 					+ "\t$s0 = " + regValue[16]);
-			
 		}
 		
 		return true;
