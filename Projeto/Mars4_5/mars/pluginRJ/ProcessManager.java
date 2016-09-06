@@ -14,17 +14,11 @@ public class ProcessManager {
 	 * @param informações iniciais para criar um novo processo
 	 */
 	public static void createProcess(int[] regValue, int pc , int hi, int lo) {
-		
 		/**
-		   
-		 Cria um PCB e inseri nas tabelas que cont�m todos os processos e na fila de processos prontos.
-	
+		* Cria um PCB e inseri nas tabelas que contem todos os processos e na fila de processos prontos.
 		*/
-		
 		tableERB.addPCB(new ProcessControlBlock(++pidId, regValue, pc, hi, lo));
 		SystemIO.printString("\nPocesso: p" + pidId + " Criado\n");
-		
-		
 	}
 	
 	/**
@@ -63,5 +57,4 @@ public class ProcessManager {
 	public static void resetPid(){
 		pidId = 0;
 	}
-	
 }

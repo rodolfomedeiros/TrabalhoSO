@@ -5,7 +5,6 @@ import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
 import mars.pluginRJ.ProcessManager;
 import mars.util.SystemIO;
-import mars.pluginRJ.OutputDebug;
 import mars.pluginRJ.ProcessControlBlock;
 
 public class ProcessChange extends AbstractSyscall{
@@ -18,22 +17,23 @@ public class ProcessChange extends AbstractSyscall{
 	public void simulate(ProgramStatement statement) throws ProcessingException {
 	
 		/** 
-		  Argumentos usados para gerenciar o contexto dos processos 
-		 
-		 * */
+		 	Argumentos usados para gerenciar o contexto dos processos 
+		 */
 		
-		ProcessControlBlock pcb = ProcessManager.processChange(RegisterFile.getRegsValue(),	RegisterFile.getProgramCounter(), RegisterFile.getValue(33), RegisterFile.getValue(34));
+		ProcessControlBlock pcb = ProcessManager.processChange(		RegisterFile.getRegsValue(),
+																	RegisterFile.getProgramCounter(),
+																	RegisterFile.getValue(33),
+																	RegisterFile.getValue(34)
+																);
 		
 		//atualizaÃ§Ã£o do processo no registradores
 		
-		// Caso não exista processos pcb vai ser nulo.
+		// Caso nao exista processos pcb vai ser nulo.
 		if(pcb != null){
 			
-			// Caso seja a primeira vez rodando o processo, não há informaçõe para serem atualizadas
+			// Caso seja a primeira vez rodando o processo, nao ha informacoes para serem atualizadas
 			if(!pcb.isNull()){
-				//debug
-				//OutputDebug.odProcessChange(pcb);
-			
+
 				for(int i = 0; i < 32; i++){
 					RegisterFile.updateRegister(i, pcb.getValueReg(i));
 				}

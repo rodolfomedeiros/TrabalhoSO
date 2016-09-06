@@ -2,7 +2,10 @@
    import mars.*;
    import mars.util.*;
    import mars.mips.hardware.*;
-   import java.awt.*;
+import mars.pluginRJ.ProcessManager;
+import mars.pluginRJ.TableProcessors;
+
+import java.awt.*;
    import java.awt.event.*;
    import javax.swing.*;
 	
@@ -71,6 +74,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                return;
             }
          RegisterFile.resetRegisters();
+         //pluginRJ
+         ProcessManager.setTableERB(new TableProcessors());
+   	  	 ProcessManager.resetPid();
+   	  	 //pluginRJ
          Coprocessor1.resetRegisters();
          Coprocessor0.resetRegisters();
 

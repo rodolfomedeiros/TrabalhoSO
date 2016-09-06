@@ -20,8 +20,6 @@ P2:					# Segundo loop
 	loop2: addi $s0, $s0, -1
 	processChange
 	j loop2
-
-	done
       
-      
+      	done
       

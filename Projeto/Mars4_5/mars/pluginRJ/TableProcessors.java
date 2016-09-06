@@ -80,7 +80,7 @@ public class TableProcessors {
 		
 		/************** PCBTable ******************************
 		
-		  Contém todos os processos existentes 
+		  Contï¿½m todos os processos existentes 
 		  
 		  _______ ________________
 		 | pid   | Contexto		  |
@@ -95,7 +95,7 @@ public class TableProcessors {
 		
 		/************** ReadyTable ******************************
 		
-		  Contém todos os processos existentes >>>>> FILA <<<<<<
+		  Contï¿½m todos os processos existentes >>>>> FILA <<<<<<
 		  
 		  ___ ___ ________ 
 		 | 1 | 2 | .......|
@@ -120,7 +120,7 @@ public class TableProcessors {
 		  	adiciona o pid do processo que vai sair do processador
 		  	e o coloca na fila de pronto
 		  
-		  senão:
+		  senï¿½o:
 		  	coloca o processo direto para ser executado
 		  
 		  
@@ -149,14 +149,14 @@ public class TableProcessors {
 		
 		/** 
 		  
-		 	Verifica se o pidExec é vario, ou seja, se têm algum processo executando
-		  	Se ele não for vazio, deve-se armazenar o contexto do processo 
+		 	Verifica se o pidExec ï¿½ vario, ou seja, se tï¿½m algum processo executando
+		  	Se ele nï¿½o for vazio, deve-se armazenar o contexto do processo 
 		 
 		 */
 		
 		if(!pidExec.equals("")){
 			
-			// Atualiza informações na tabela que contém todos os registradores
+			// Atualiza informaï¿½ï¿½es na tabela que contï¿½m todos os registradores
 			
 			PCBTable.put(pidExec, new ProcessControlBlock(Integer.valueOf(pidExec), regValue, pc, hi, lo));
 			SystemIO.printString("********* Pocesso: p" + pidExec + " Saindo do processador:\n"
@@ -174,51 +174,33 @@ public class TableProcessors {
 	 */
 
 	public boolean finalizeProcess(){
-		
-		
 		pidExec = scherdulerAlgoritmQueue();
 		
 		if(!pidExec.equals("")){
 			return true;
-		} else {
-			return false;
 		}
-		
+			
+		return false;
 	}	
 	
 	/**
 	 * Um algoritmo simples do escalonador, pega o primeiro da fila e informa ao despachante para ser executado.
 	 */
 	public String scherdulerAlgoritmQueue(){
-		
 		/**
-		 
-			Verifica se a lista que contem os processos prontos está vazia,
+			Verifica se a lista que contem os processos prontos estï¿½ vazia,
 			
-			se não estiver: 
+			se nï¿½o estiver: 
 				Pega o novo processo para ser executado e remore da lista.
 			
-			senão: 
+			senï¿½o: 
 				Retorna vazio;
-		 
-		 
 		*/
 		
-		if(ReadyTable.size() > 0){
-			
-			return ReadyTable.removeFirst();
-		}
-		
-			return "";
-		
-		/*
 		if(!ReadyTable.isEmpty()){
-			
 			return ReadyTable.removeFirst();
 		}
 		
 		return "";
-		*/
 	}
-
 }

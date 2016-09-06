@@ -5,7 +5,6 @@ import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
 import mars.pluginRJ.ProcessManager;
 import mars.util.SystemIO;
-import mars.pluginRJ.OutputDebug;
 import mars.pluginRJ.ProcessControlBlock;
 
 public class ProcessTerminate extends AbstractSyscall{
@@ -21,9 +20,6 @@ public class ProcessTerminate extends AbstractSyscall{
 		
 		//se existe algum processo para ser executado, as informações será adicionada nos registradores
 		if(pcb != null){
-			//debug
-			//OutputDebug.odProcessChange(pcb);
-			
 			for(int i = 0; i < 32; i++){
 				RegisterFile.updateRegister(i, pcb.getValueReg(i));
 			}
@@ -32,8 +28,8 @@ public class ProcessTerminate extends AbstractSyscall{
 			RegisterFile.setLo(pcb.getLo());
 			SystemIO.printString("\n\n********* Pocesso: p" + pcb.getPid() + " Entrando no processador:\n");
 		}else{
-			SystemIO.printString("N�o possui mais nenhum processo para ser executado! Finalizando...");
-			new SyscallExit();
+			SystemIO.printString("Nao possui mais nenhum processo para ser executado! Finalizando...");
+			//new SyscallExit();
 		}
 	}
 }

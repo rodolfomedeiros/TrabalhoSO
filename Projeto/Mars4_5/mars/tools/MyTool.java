@@ -89,7 +89,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          message.setLineWrap(true);
          message.setWrapStyleWord(true);
          message.setFont(new Font("Ariel",Font.PLAIN,12));
-         message.setText("Texto do Inferno!!");
+         message.setText("");
 				message.setCaretPosition(0); // Assure first line is visible and at top of scroll pane.
          return new JScrollPane(message);
       }

@@ -16,15 +16,13 @@ public class Fork extends AbstractSyscall{
 		
 		/****************** Criando o processo ******************************************
 		
-		Classe ProcessManager Gerencia os processos
+			Classe ProcessManager Gerencia os processos
 		
-			método createProcess(<Valor dos registradores>, pc, hi, lo)
+			metodo createProcess(<Valor dos registradores>, pc, hi, lo)
 		
-			<Valor dos registradores> = Null -> Processo está sendo criado, então seus registradores não tem valor nenhum
-			
-			
+			<Valor dos registradores> = Null -> Processo estï¿½ sendo criado, entï¿½o seus registradores nï¿½o tem valor nenhum
 		*/
 		ProcessManager.createProcess(null, RegisterFile.getValue(4), 0,	0);
-	
+		
 	}
 }
