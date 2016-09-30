@@ -3,7 +3,7 @@ package mars.mips.instructions.syscalls;
 import mars.ProcessingException;
 import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
-import mars.pluginRJ.ProcessManager;
+import mars.pluginRJ.management.process.ProcessManager;
 
 public class Fork extends AbstractSyscall{
 

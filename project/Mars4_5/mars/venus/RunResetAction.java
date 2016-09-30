@@ -2,8 +2,8 @@
    import mars.*;
    import mars.util.*;
    import mars.mips.hardware.*;
-import mars.pluginRJ.ProcessManager;
-import mars.pluginRJ.TableProcessors;
+import mars.pluginRJ.management.process.ProcessManager;
+import mars.pluginRJ.management.process.TableProcessors;
 
 import java.awt.*;
    import java.awt.event.*;

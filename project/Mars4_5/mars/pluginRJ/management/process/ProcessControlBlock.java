@@ -1,4 +1,4 @@
-package mars.pluginRJ;
+package mars.pluginRJ.management.process;
 
 public class ProcessControlBlock {
 	
@@ -18,7 +18,7 @@ public class ProcessControlBlock {
 		setRegisters(regValue);
 		setPc(pc);
 		
-		/**************** Não são usados nesse trabahlo************/
+		/**************** Nï¿½o sï¿½o usados nesse trabahlo************/
 		
 		setHi(hi); 
 		setLo(lo);
