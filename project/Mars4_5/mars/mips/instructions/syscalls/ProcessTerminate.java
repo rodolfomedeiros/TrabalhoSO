@@ -3,9 +3,9 @@ package mars.mips.instructions.syscalls;
 import mars.ProcessingException;
 import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
-import mars.pluginRJ.ProcessManager;
+import mars.pluginRJ.management.process.ProcessControlBlock;
+import mars.pluginRJ.management.process.ProcessManager;
 import mars.util.SystemIO;
-import mars.pluginRJ.ProcessControlBlock;
 
 public class ProcessTerminate extends AbstractSyscall{
 

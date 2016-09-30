@@ -1,4 +1,4 @@
-package mars.pluginRJ;
+package mars.pluginRJ.management.process;
 
 import java.util.ArrayList;
 import java.util.HashMap;
