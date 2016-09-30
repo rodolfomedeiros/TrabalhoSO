@@ -2,30 +2,20 @@ package mars.pluginRJ.management.process;
 
 public class ProcessControlBlock {
 	
+	//Valores dos registradores(0-31)
 	private int[] regValue;
 	private int pc;
 	private int hi;
 	private int lo;
+	//id de processo
 	private String pid;
 	
-	//constructor
 	public ProcessControlBlock(int pid, int[] regValue, int pc, int hi, int lo){
-		
-		
-		// Seta os valores do pid; dos registradores; do pc; do hi e do lo
-		
 		setPid(String.valueOf(pid));
 		setRegisters(regValue);
 		setPc(pc);
-		
-		/**************** N�o s�o usados nesse trabahlo************/
-		
 		setHi(hi); 
 		setLo(lo);
-		
-		
-		/***********************************************************/
-	
 	}
 	
 	public int[] getRegsValue() {
