@@ -2,6 +2,7 @@
    import mars.*;
    import mars.util.*;
    import mars.mips.hardware.*;
+import mars.pluginRJ.management.memory.MemoryManagement;
 import mars.pluginRJ.management.process.ProcessManager;
 import mars.pluginRJ.management.process.TableProcessors;
 
@@ -77,6 +78,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          //pluginRJ
          ProcessManager.setTableERB(new TableProcessors());
    	  	 ProcessManager.resetPid();
+   	  	 MemoryManagement.ResetInstance();
    	  	 //pluginRJ
          Coprocessor1.resetRegisters();
          Coprocessor0.resetRegisters();

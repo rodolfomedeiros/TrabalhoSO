@@ -63,49 +63,18 @@ public class TableProcessors {
 	 * @return retorna o processo que está executando.
 	 */
 	public ProcessControlBlock getPcbExec(){
-		
 		if(!pidExec.equals("")){
-			
 			return PCBTable.remove(pidExec);
-			
 		}
-		return null;
-		
+		return null;	
 	}
 	
 	/**
 	 * @param adiciona o novo processo na tabela.
 	 */
 	public void addPCB(ProcessControlBlock pcb){
-		
-		/************** PCBTable ******************************
-		
-		  Cont�m todos os processos existentes 
-		  
-		  _______ ________________
-		 | pid   | Contexto		  |
-		 	1			pcb
-		 	2			pcb
-		 	.			.
-		 |_______|________________|	
-		  
-		 
-		*/
-		
-		
-		/************** ReadyTable ******************************
-		
-		  Cont�m todos os processos existentes >>>>> FILA <<<<<<
-		  
-		  ___ ___ ________ 
-		 | 1 | 2 | .......|
-		 
-		 
-		 */
-		
 		PCBTable.put(pcb.getPid(), pcb);
 		ReadyTable.add(pcb.getPid());
-		
 	}
 
 	public void processChange() {
