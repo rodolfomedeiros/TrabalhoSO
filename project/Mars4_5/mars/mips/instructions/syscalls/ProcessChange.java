@@ -3,6 +3,7 @@ package mars.mips.instructions.syscalls;
 import mars.ProcessingException;
 import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
+import mars.pluginRJ.management.memory.MemoryManagement;
 import mars.pluginRJ.management.process.ProcessControlBlock;
 import mars.pluginRJ.management.process.ProcessManager;
 import mars.util.SystemIO;
@@ -15,11 +16,6 @@ public class ProcessChange extends AbstractSyscall{
 
 	@Override
 	public void simulate(ProgramStatement statement) throws ProcessingException {
-	
-		/** 
-		 	Argumentos usados para gerenciar o contexto dos processos 
-		 */
-		
 		ProcessControlBlock pcb = ProcessManager.processChange(		RegisterFile.getRegsValue(),
 																	RegisterFile.getProgramCounter(),
 																	RegisterFile.getValue(33),
@@ -30,6 +26,9 @@ public class ProcessChange extends AbstractSyscall{
 		
 		// Caso nao exista processos pcb vai ser nulo.
 		if(pcb != null){
+			
+			//atribuindo na memory o processo que esta sendo executado
+			MemoryManagement.getInstace().setExecuteProcessPid(pcb.getPid());
 			
 			// Caso seja a primeira vez rodando o processo, nao ha informacoes para serem atualizadas
 			if(!pcb.isNull()){

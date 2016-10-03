@@ -17,6 +17,6 @@ public class Fork extends AbstractSyscall{
 		//create process
 		String pid = ProcessManager.createProcess(null, RegisterFile.getValue(4), 0, 0);
 		//map in memory
-		MemoryManagement.getInstace().addToMapProcess(pid);
+		MemoryManagement.getInstace().addToProcessMap(pid);
 	}
 }

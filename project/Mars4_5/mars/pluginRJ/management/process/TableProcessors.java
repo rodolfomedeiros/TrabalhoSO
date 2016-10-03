@@ -81,16 +81,6 @@ public class TableProcessors {
 		
 		String pidE = scherdulerAlgoritmQueue();
 		
-		/**
-		  Verifica e o retorno foi diferente vazio
-		  
-		  se sim:
-		  	adiciona o pid do processo que vai sair do processador
-		  	e o coloca na fila de pronto
-		  senao:
-		  	coloca o processo direto para ser executado
-		 */
-		
 		if(!pidExec.equals("") && !pidE.equals("")){
 			ReadyTable.add(pidExec);
 		}
@@ -115,7 +105,6 @@ public class TableProcessors {
 		 */
 		
 		if(!pidExec.equals("")){
-			// Atualiza informa��es na tabela que cont�m todos os registradores
 			PCBTable.put(pidExec, new ProcessControlBlock(Integer.valueOf(pidExec), regValue, pc, hi, lo));
 			SystemIO.printString("********* Pocesso: p" + pidExec + " Saindo do processador:\n"
 					+ "\t$s0 = " + regValue[16]);
@@ -126,10 +115,8 @@ public class TableProcessors {
 	
 	/**
 	 * basicamente modifica o processo que esta executando
-	 * 
 	 * @return
 	 */
-
 	public boolean finalizeProcess(){
 		pidExec = scherdulerAlgoritmQueue();
 		
@@ -144,16 +131,6 @@ public class TableProcessors {
 	 * Um algoritmo simples do escalonador, pega o primeiro da fila e informa ao despachante para ser executado.
 	 */
 	public String scherdulerAlgoritmQueue(){
-		/**
-			Verifica se a lista que contem os processos prontos est� vazia,
-			
-			se n�o estiver: 
-				Pega o novo processo para ser executado e remore da lista.
-			
-			sen�o: 
-				Retorna vazio;
-		*/
-		
 		if(!ReadyTable.isEmpty()){
 			return ReadyTable.removeFirst();
 		}

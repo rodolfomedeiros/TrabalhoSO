@@ -11,7 +11,7 @@ public class ProcessManager {
 	private static TableProcessors tableERB = new TableProcessors();
 
 	/**
-	 * @param informações iniciais para criar um novo processo
+	 * informações iniciais para criar um novo processo
 	 * @return pid do processo guardado na tabela...
 	 */
 	public static String createProcess(int[] regValue, int pc , int hi, int lo) {
@@ -22,7 +22,7 @@ public class ProcessManager {
 	}
 	
 	/**
-	 * @param informações de guarda, ou seja, são as informações do processo que está executando
+	 * informações de guarda, ou seja, são as informações do processo que está executando
 	 * @return retorna um processo que irá executar.
 	 */
 	public static ProcessControlBlock processChange(int[] regValue, int pc , int hi, int lo){

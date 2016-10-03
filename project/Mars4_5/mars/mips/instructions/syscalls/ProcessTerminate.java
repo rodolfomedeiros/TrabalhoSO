@@ -3,6 +3,7 @@ package mars.mips.instructions.syscalls;
 import mars.ProcessingException;
 import mars.ProgramStatement;
 import mars.mips.hardware.RegisterFile;
+import mars.pluginRJ.management.memory.MemoryManagement;
 import mars.pluginRJ.management.process.ProcessControlBlock;
 import mars.pluginRJ.management.process.ProcessManager;
 import mars.util.SystemIO;
@@ -16,10 +17,13 @@ public class ProcessTerminate extends AbstractSyscall{
 	@Override
 	public void simulate(ProgramStatement statement) throws ProcessingException {
 		
+		//removendo processo do mapeamento da memoria
+		MemoryManagement.getInstace().removeProcessMap(ProcessManager.getTableERB().getPidExec());
+		
 		ProcessControlBlock pcb = ProcessManager.processTerminate();
 		
 		//se existe algum processo para ser executado, as informações será adicionada nos registradores
-		if(pcb != null){
+		if(pcb != null){		
 			for(int i = 0; i < 32; i++){
 				RegisterFile.updateRegister(i, pcb.getValueReg(i));
 			}
