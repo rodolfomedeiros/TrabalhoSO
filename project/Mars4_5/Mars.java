@@ -1,3 +1,5 @@
+import mars.pluginRJ.management.memory.AlgorithmType;
+import mars.pluginRJ.management.memory.MemoryManagement;
 
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar

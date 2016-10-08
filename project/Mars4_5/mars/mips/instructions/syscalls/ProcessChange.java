@@ -27,7 +27,7 @@ public class ProcessChange extends AbstractSyscall{
 		// Caso nao exista processos pcb vai ser nulo.
 		if(pcb != null){
 			
-			//atribuindo na memory o processo que esta sendo executado
+			//informando a memory o processo que esta sendo executado
 			MemoryManagement.getInstace().setExecuteProcessPid(pcb.getPid());
 			
 			// Caso seja a primeira vez rodando o processo, nao ha informacoes para serem atualizadas

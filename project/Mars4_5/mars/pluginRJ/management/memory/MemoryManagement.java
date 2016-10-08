@@ -1,10 +1,15 @@
 package mars.pluginRJ.management.memory;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 
+import mars.mips.hardware.AccessNotice;
+import mars.mips.hardware.Register;
+import mars.mips.hardware.RegisterAccessNotice;
 import mars.util.SystemIO;
 
-public class MemoryManagement {
+public class MemoryManagement implements Observer{
 	
 	private static MemoryManagement memoryManagement;
 	
@@ -14,31 +19,50 @@ public class MemoryManagement {
 	
 	public static MemoryManagement getInstace(){
 		if(memoryManagement == null){
-			memoryManagement = new MemoryManagement();
+			memoryManagement = new MemoryManagement(AlgorithmType.FIFO);
 		}
-		
 		return memoryManagement;
+	}
+	
+	public static void setInstace(AlgorithmType type){
+		memoryManagement = new MemoryManagement(type);
 	}
 	
 	// **************** ***************** ******************
 	
+	/**
+	 * Tabela de paginas
+	 */
 	private PageTable pageTable;
+	/**
+	 * Tabela de processos mapeados
+	 */
 	private Vector<String> processMap;
+	/**
+	 * Quantidade de processos que podem ser mapeados.
+	 */
 	private int sizeProcess;
+	/**
+	 * Processo que está sendo executado!
+	 */
 	private String executeProcessPid;
+	/**
+	 * Índice do último processo executado;
+	 */
+	private int lastIndexProcessMap;
+	/**
+	 * Tipo de algoritmo utilizado
+	 */
 	
-	public MemoryManagement(){
-		initilizer();
-	}
-	
-	private void initilizer() {
-		setPageTable(new PageTable());
+	public MemoryManagement(AlgorithmType type){
+		setPageTable(new PageTable(type));
 		setSizeProcess(pageTable.getSizeTable()/pageTable.getSizePageProcess());
 		setProcessMap(new Vector<String>(sizeProcess, 0));
 		for(int i=0; i < sizeProcess; i++){
 			processMap.addElement(null);
 		}
 		setExecuteProcessPid(null);
+		lastIndexProcessMap = 0;
 	}
 
 	private void setSizeProcess(int i) {
@@ -59,13 +83,10 @@ public class MemoryManagement {
 	 * Adiciona no mapeamento da memória um novo pid de processo, para identificar seu espaço na tabela
 	 */
 	public void addToProcessMap(String pid){
-		@SuppressWarnings("unused")
-		boolean add = false;
 		for(int i = 0; i < sizeProcess; i++){
 			if(processMap.get(i) == null){
 				processMap.set(i, pid);
 				SystemIO.printString("\n Memory - Processo mapeado = "+ pid + " index map = " + i);
-				add = true;
 				break;
 			}
 		}
@@ -96,6 +117,32 @@ public class MemoryManagement {
 	
 	// ************************ MMU ****************************************
 	
+	@Override
+	public void update(Observable o, Object arg) {
+		Register pc = (Register) o;
+		RegisterAccessNotice notice = (RegisterAccessNotice) arg;
+		
+		if(notice.getAccessType() == AccessNotice.WRITE && executeProcessPid != null){
+			System.out.println("Valor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
+			SystemIO.printString("\nValor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
+			System.out.println("index mapeado = "+ getIndexProcessMap());
+			
+			
+		}
+		
+	}
 	
+	private int getIndexProcessMap(){
+		while(true){
+			if(processMap.get(lastIndexProcessMap) != null && processMap.get(lastIndexProcessMap).equals(executeProcessPid)){
+				return lastIndexProcessMap;
+			}else{
+				lastIndexProcessMap++;
+				if(lastIndexProcessMap == sizeProcess){
+					lastIndexProcessMap = 0;
+				}
+			}
+		}
+	}
 	
 }

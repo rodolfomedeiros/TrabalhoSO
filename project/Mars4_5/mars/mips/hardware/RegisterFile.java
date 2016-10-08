@@ -71,11 +71,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       private static Register lo= new Register("lo", 34, 0);// this is an internal register with arbitrary number
    		 
       
-      /** 
+      /* 
        * Novos métodos inseridos
        *  -----  PluginRJ ------
        */
-      
       public static void setHi(int value){
     	  hi.setValue(value);
       }
@@ -95,11 +94,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     	  return regValue;
       }
       
-      public static void setRegisters(Register[] reg){
-    	  regFile = reg;
+      public static void addPCObserver(Observer o){
+    	  programCounter.addObserver(o);
       }
       
-   
+      public static void deletePCObserver(Observer o){
+    	  programCounter.deleteObserver(o);
+      }
+            
+      // FIM PLUGInRJ
+      
+      
    	/**
    	  *  Method for displaying the register values for debugging.
    	  **/	 
