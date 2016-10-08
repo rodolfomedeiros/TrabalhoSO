@@ -3,45 +3,23 @@ package mars.pluginRJ.management.memory;
 import java.util.Observable;
 import java.util.Vector;
 
-public class PageTable extends Observable{
+public abstract class PageTable extends Observable{
 
 	private final int sizeTable = 16;
 	private final int sizePageProcess = 4;
-	private Vector<Page> table;
-	private boolean pageFault;
+	protected Vector<Page> table;
+	protected boolean pageFault;
+	protected int indexMap;
 	
-	//Algoritmo
-	private AlgorithmType type;
-	
-	/*
-	 * FIFO dependencias
-	 * 
-	 * colunm 0 -> ultima pagina referenciada 
-	 * colunm 1 -> page fault
-	 */
-	private int fifo[][] = null;
-	
-	public PageTable(AlgorithmType type) {
-		initializer(type);
-	}
-	
-	private void initializer(AlgorithmType type){
+	public PageTable() {
 		this.table = new Vector<Page>(sizeTable, 0);
 		for(int i=0; i < sizeTable; i++){
-			table.addElement(null);
+			table.addElement(new Page());
 		}
-		this.type = type;
-		//inicializa as dependencias do tipo de algoritmo
-		initializerType();
 		setPageFault(false);
+		setIndexMap(-1);
 	}
 	
-	private void initializerType(){
-		if(type == AlgorithmType.FIFO){
-			fifo = new int[sizeTable/sizePageProcess][2];
-		}
-	}
-
 	public int getSizeTable() {
 		return sizeTable;
 	}
@@ -58,40 +36,24 @@ public class PageTable extends Observable{
 		return pageFault;
 	}
 	
-	// ********************* Manager Table ***********************************
+	public int getIndexMap(){
+		return indexMap;
+	}
+	
+	public void setIndexMap(int index){
+		this.indexMap = index;
+	}
+	
 	/**
 	 * Verifica se o endereço está mapeado.
 	 * False -> Roda o algoritmo de troca de pagina.
 	 * True -> Não faz nada.
 	 * Any -> Atualiza a visualização(virtual memory illustrator)
 	 */
-	public void checkPageMap(int indexProcessMap, String address){
-		boolean pageMap = false;
-		int index = indexProcessMap * sizePageProcess;
-		int lastIndex = index + sizePageProcess;
-		
-		//verificao de algoritmo utilizado
-		if(type == AlgorithmType.FIFO){
-			if(fifo[indexProcessMap][1] == 1){
-				//page fault
-				setPageFault(true);
-				
-				
-				
-			}else{
-				//verifica as paginas mapeadas para o processo informado.
-				for(int i = index; i < lastIndex; i++){
-					if(table.get(i) != null && table.get(i).equals(address)){
-						//PAREIIIIIIIIIIIIIIIII AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-					}
-				}
-			}
-			
-		}
-		
+	protected abstract void checkPageMap(int indexProcessMap, int address);
+	
+	protected void setTableChanged(){
+		setChanged();
+		notifyObservers();
 	}
-	
-	
-	
-	
 }

@@ -50,12 +50,9 @@ public class MemoryManagement implements Observer{
 	 * Índice do último processo executado;
 	 */
 	private int lastIndexProcessMap;
-	/**
-	 * Tipo de algoritmo utilizado
-	 */
 	
 	public MemoryManagement(AlgorithmType type){
-		setPageTable(new PageTable(type));
+		setPageTable(type);
 		setSizeProcess(pageTable.getSizeTable()/pageTable.getSizePageProcess());
 		setProcessMap(new Vector<String>(sizeProcess, 0));
 		for(int i=0; i < sizeProcess; i++){
@@ -69,8 +66,10 @@ public class MemoryManagement implements Observer{
 		this.sizeProcess = i;
 	}
 
-	private void setPageTable(PageTable pageTable){
-		this.pageTable = pageTable;
+	private void setPageTable(AlgorithmType type){
+		if(AlgorithmType.FIFO == type){
+			this.pageTable = new PageTableFIFO();
+		}
 	}
 	
 	private void setProcessMap(Vector<String> processMap){
@@ -123,13 +122,11 @@ public class MemoryManagement implements Observer{
 		RegisterAccessNotice notice = (RegisterAccessNotice) arg;
 		
 		if(notice.getAccessType() == AccessNotice.WRITE && executeProcessPid != null){
-			System.out.println("Valor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
-			SystemIO.printString("\nValor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
-			System.out.println("index mapeado = "+ getIndexProcessMap());
-			
-			
+			//System.out.println("Valor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
+			//SystemIO.printString("\nValor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
+			//System.out.println("index mapeado = "+ getIndexProcessMap());
+			pageTable.checkPageMap(getIndexProcessMap(), pc.getValueNoNotify());
 		}
-		
 	}
 	
 	private int getIndexProcessMap(){
@@ -144,5 +141,4 @@ public class MemoryManagement implements Observer{
 			}
 		}
 	}
-	
 }

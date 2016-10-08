@@ -23,9 +23,9 @@ public class Page {
 	public Page() {
 		
 		setPresent(false);
-		setRead(false);
-		setWrite(false);
-		setExecute(false);
+		setRead(true);
+		setWrite(true);
+		setExecute(true);
 		setModified(false);
 		setReferenced(false);
 		setCache(false);
