@@ -73,7 +73,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  *  Required method to return Tool name.  
    	  *  @return  Tool name.  MARS will display this in menu item.
    	  */
-       public String getName() {
+      public String getName() {
          return "MyTool";
       }
    	
@@ -83,15 +83,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 *  BorderLayout.  The title is in the NORTH area, and the controls are 
    	 *  in the SOUTH area.
    	 */
-       protected JComponent buildMainDisplayArea() {
-         JTextArea message = new JTextArea();
-         message.setEditable(false);
-         message.setLineWrap(true);
-         message.setWrapStyleWord(true);
-         message.setFont(new Font("Ariel",Font.PLAIN,12));
-         message.setText("");
-				message.setCaretPosition(0); // Assure first line is visible and at top of scroll pane.
-         return new JScrollPane(message);
+      protected JComponent buildMainDisplayArea() {
+		 JTextArea message = new JTextArea();
+		 message.setEditable(false);
+		 message.setLineWrap(true);
+		 message.setWrapStyleWord(true);
+		 message.setFont(new Font("Ariel",Font.PLAIN,12));
+		 message.setText("");
+		 message.setCaretPosition(0); // Assure first line is visible and at top of scroll pane.
+	     return new JScrollPane(message);
       }
    	
    }

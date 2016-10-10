@@ -67,8 +67,11 @@ public class MemoryManagement implements Observer{
 	}
 
 	private void setPageTable(AlgorithmType type){
-		if(AlgorithmType.FIFO == type){
-			this.pageTable = new PageTableFIFO();
+		switch(type){
+			case FIFO:
+					this.pageTable = new PageTableFIFO();
+			default: 
+					this.pageTable = new PageTableFIFO();
 		}
 	}
 	

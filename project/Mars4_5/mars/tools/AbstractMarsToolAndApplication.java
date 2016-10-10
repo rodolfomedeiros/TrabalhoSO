@@ -56,16 +56,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     public abstract class AbstractMarsToolAndApplication extends JFrame implements MarsTool, Observer {
       protected boolean isBeingUsedAsAMarsTool = false;  // can use to determine whether invoked as MarsTool or stand-alone.
       protected AbstractMarsToolAndApplication thisMarsApp;
-      private JDialog dialog;  // used only for MarsTool use.  This is the pop-up dialog that appears when menu item selected.
+      protected JDialog dialog;  // used only for MarsTool use.  This is the pop-up dialog that appears when menu item selected.
       protected Window theWindow;  // highest level GUI component (a JFrame for app, a JDialog for MarsTool)
    	
    	// Major GUI components
       JLabel headingLabel;
-      private String title;  // descriptive title for title bar provided to constructor.
+      protected String title;  // descriptive title for title bar provided to constructor.
       private String heading; // Text to be displayed in the top portion of the main window.
    	
    	// Some GUI settings
-      private EmptyBorder emptyBorder = new EmptyBorder(4,4,4,4);
+      protected EmptyBorder emptyBorder = new EmptyBorder(4,4,4,4);
       private Color backgroundColor = Color.WHITE;
    	
    	
@@ -84,7 +84,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
       // Structure required for MarsTool use only (not stand-alone use). Want subclasses to have access.
       protected ConnectButton connectButton;      
-   
    
       /**
    	 * Simple constructor

@@ -5,3 +5,5 @@
 /MemoryManagement$algorithmType.class
 /AlgorithmType.class
 /PageTableFIFO.class
+/PageTableFIFO$OptionFIFO.class
+/OptionFIFO.class
