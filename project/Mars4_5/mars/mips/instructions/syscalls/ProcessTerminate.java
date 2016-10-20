@@ -30,6 +30,7 @@ public class ProcessTerminate extends AbstractSyscall{
 			for(int i = 0; i < 32; i++){
 				RegisterFile.updateRegister(i, pcb.getValueReg(i));
 			}
+			
 			RegisterFile.setProgramCounter(pcb.getPc());
 			RegisterFile.setHi(pcb.getHi());
 			RegisterFile.setLo(pcb.getLo());

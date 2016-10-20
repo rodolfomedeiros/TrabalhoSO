@@ -40,7 +40,7 @@ public class ProcessChange extends AbstractSyscall{
 				RegisterFile.setHi(pcb.getHi());
 				RegisterFile.setLo(pcb.getLo());
 			}
-		
+			
 			RegisterFile.setProgramCounter(pcb.getPc());
 			
 			SystemIO.printString("\n\n********* Pocesso: p" + pcb.getPid() + " Entrando no processador:\n");

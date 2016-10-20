@@ -1,11 +1,7 @@
 package mars.pluginRJ.management.memory;
 
-public class PageTableFIFO extends PageTable {
-	
-	public PageTableFIFO() {
-		super();
-	}
-	
+public class PageTableSC extends PageTable{
+
 	@Override
 	public void checkPageMap(int indexProcessMap, int address) {
 		int index = indexProcessMap * getSizePageProcess();
@@ -34,9 +30,30 @@ public class PageTableFIFO extends PageTable {
 			option.get(indexProcessMap).setMiss(1);
 			//Atribuições da nova pagina
 			Page p = table.get(option.get(indexProcessMap).getIndexPage());
-			p.setValue(address);
-			p.setPresent(true);
-			p.setReferenced(true);
+			
+			if(p.isPresent()){
+				while(true){
+					if(p.isReferenced()){
+						p.setReferenced(false);
+						
+						option.get(indexProcessMap).addIndexPage(1); 
+						if(option.get(indexProcessMap).getIndexPage() == lastIndex){
+							option.get(indexProcessMap).setIndexPage(index);
+						}
+						
+						p = table.get(option.get(indexProcessMap).getIndexPage());
+					}else{
+						p.setValue(address);
+						p.setPresent(true);
+						p.setReferenced(true);
+						break;
+					}
+				}
+			}else{
+				p.setValue(address);
+				p.setPresent(true);
+				p.setReferenced(true);
+			}
 			
 			setIndexMap(option.get(indexProcessMap).getIndexPage());
 			setIndexProcess(indexProcessMap);

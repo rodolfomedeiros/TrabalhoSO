@@ -10,14 +10,25 @@ public abstract class PageTable extends Observable{
 	protected Vector<Page> table;
 	protected boolean pageFault;
 	protected int indexMap;
+	protected int indexProcess;
+	/*
+	 * dependencias
+	 * 
+	 * colunm 0 -> endereço da pagina que deve ser modificada.
+	 */
+	protected Vector<Option> option;
 	
 	public PageTable() {
 		this.table = new Vector<Page>(sizeTable, 0);
 		for(int i=0; i < sizeTable; i++){
 			table.addElement(new Page());
 		}
-		setPageFault(false);
-		setIndexMap(-1);
+		int line = getSizeTable()/getSizePageProcess();
+		option = new Vector<Option>(line, 0);
+		//default
+		for(int i = 0; i < line; i++){
+			option.addElement(new Option(i * getSizePageProcess()));
+		}
 	}
 	
 	public int getSizeTable() {
@@ -42,6 +53,18 @@ public abstract class PageTable extends Observable{
 	
 	public void setIndexMap(int index){
 		this.indexMap = index;
+	}
+	public Vector<Page> getTable(){
+		return table;
+	}
+	public Vector<Option> getOption(){
+		return option;
+	}
+	protected void setIndexProcess(int index){
+		this.indexProcess = index;
+	}
+	public int getIndexProcess(){
+		return indexProcess;
 	}
 	
 	/**
