@@ -81,7 +81,7 @@ public class MemoryManagement implements Observer{
 			case SC:
 				this.pageTable = new PageTableSC();
 			case NRU:
-				//this.pageTable = new PageTableNRU();
+				this.pageTable = new PageTableNRU();
 			case LRU:
 				//this.pageTable = new PageTableLRU();
 			default: 
