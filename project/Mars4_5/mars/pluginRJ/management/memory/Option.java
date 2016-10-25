@@ -7,7 +7,9 @@ public class Option{
 	private int miss;
 	
 	public Option(int index){
+		//utilizado pelo fifo
 		setIndexPage(index);
+		
 		setHit(0);
 		setMiss(0);
 	}

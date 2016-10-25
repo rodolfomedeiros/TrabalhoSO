@@ -16,9 +16,11 @@ public class Page {
 	private boolean referenced;
 	//Bit de cache(utilizado pelo SO)
 	private boolean cache;
-	
 	//Valor do address
 	private int value;
+	//contador de LRU
+	private int count;
+	
 
 	public Page() {
 		
@@ -30,6 +32,7 @@ public class Page {
 		setReferenced(false);
 		setCache(false);
 		
+		setCount(0);
 		setValue(0);
 	}
 
@@ -80,6 +83,14 @@ public class Page {
 	public void setReferenced(boolean referenced) {
 		this.referenced = referenced;
 	}
+	
+	public int getReferencedInt(){
+		if(isReferenced() == true){
+			return 1;
+		}
+		
+		return 0;
+	}
 
 	public boolean isCache() {
 		return cache;
@@ -95,6 +106,20 @@ public class Page {
 
 	public void setValue(int value) {
 		this.value = value;
+	}
+	
+	public int getCount(){
+		return count;
+	}
+	
+	public void setCount(int value){
+		count = value;
+	}
+	
+	public void addLeftCount(int r){
+		String i = Integer.toBinaryString(count);
+		i = r + i;
+		count = Integer.parseInt(i,2);
 	}
 
 }

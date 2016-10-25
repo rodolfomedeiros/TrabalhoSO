@@ -74,4 +74,18 @@ public class PageTableNRU extends PageTable{
 		}
 		return -1;
 	}
+	
+	@Override
+	protected void resetReferenceTable(){
+		Page p;
+		for(int i = 0; i < table.size(); i++){
+			p = table.get(i);
+			
+			if(p.isPresent()){
+				System.out.println("Referencia -> "+ p.getValue() + " -> "+ p.isReferenced());
+				p.setReferenced(false);
+			}
+		}
+		p = null;
+	}
 }

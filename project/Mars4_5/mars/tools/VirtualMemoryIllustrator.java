@@ -61,7 +61,7 @@ public class VirtualMemoryIllustrator extends AbstractMarsToolAndApplication {
 	
 	public static void main(String[] args) {
         new VirtualMemoryIllustrator(heading+", "+version,heading).go();
-     }
+    }
 	
 	public VirtualMemoryIllustrator(String title, String heading) {
 		super(title, heading);
@@ -150,9 +150,10 @@ public class VirtualMemoryIllustrator extends AbstractMarsToolAndApplication {
         }
 
         buttonMiss.setText("MISS");
-
+        buttonMiss.setBackground(Color.gray);
         buttonHit.setText("HIT");
-
+        buttonHit.setBackground(Color.gray);
+		
         textAddressHit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         radioFIFO.setText("FIFO");
@@ -344,9 +345,11 @@ public class VirtualMemoryIllustrator extends AbstractMarsToolAndApplication {
 		}else
 		if(b.equals("NRU")){
 			MemoryManagement.setInstace(AlgorithmType.NRU);
+			System.out.println("Algoritmo escolhido -> NRU");
 		}else
 		if(b.equals("LRU")){
 			MemoryManagement.setInstace(AlgorithmType.LRU);
+			System.out.println("Algoritmo escolhido -> LRU");
 		}
 		
 		MemoryManagement.getInstace().getTable().addObserver(this);

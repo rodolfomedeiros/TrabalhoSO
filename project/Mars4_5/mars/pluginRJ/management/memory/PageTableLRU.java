@@ -1,12 +1,12 @@
 package mars.pluginRJ.management.memory;
 
-public class PageTableFIFO extends PageTable {
-	public PageTableFIFO() {
+public class PageTableLRU extends PageTable{
+	public PageTableLRU() {
 		super();
 	}
 	
 	@Override
-	public void checkPageMap(int indexProcessMap, int address) {
+	protected void checkPageMap(int indexProcessMap, int address) {
 		int index = indexProcessMap * getSizePageProcess();
 		int lastIndex = index + getSizePageProcess();
 		
@@ -27,29 +27,33 @@ public class PageTableFIFO extends PageTable {
 			}
 		}
 		
-		//falta de pagina, roda o algoritmo
 		if(getPageFault()){
 			//miss
 			option.get(indexProcessMap).setMiss(1);
-			//Atribuições da nova pagina
-			Page p = table.get(option.get(indexProcessMap).getIndexPage());
-			p.setValue(address);
+			
+			int indexSelection = index;
+			
+			for(int i = index+1; i < lastIndex; i++){
+				if(table.get(i-1).isPresent()){
+					if(table.get(indexSelection).getCount() > table.get(i).getCount()){
+						indexSelection = i;
+					}
+				}
+			}
+			
+			Page p = table.get(indexSelection);
 			p.setPresent(true);
 			p.setReferenced(true);
-			
-			setIndexMap(option.get(indexProcessMap).getIndexPage());
+			p.setValue(address);
+				
+			setIndexMap(indexSelection);
 			setIndexProcess(indexProcessMap);
-			
-			//modificação de ultima pagina
-			option.get(indexProcessMap).addIndexPage(1); 
-			if(option.get(indexProcessMap).getIndexPage() == lastIndex){
-				option.get(indexProcessMap).setIndexPage(index);
-			}
 		}
 		
 		//informa aos observers
 		setTableChanged();
 	}
+	
 	
 	@Override
 	protected void resetReferenceTable(){
@@ -58,10 +62,11 @@ public class PageTableFIFO extends PageTable {
 			p = table.get(i);
 			
 			if(p.isPresent()){
-				System.out.println("Referencia -> "+ p.getValue() + " -> "+ p.isReferenced());
+				//System.out.println("Referencia -> "+ p.getValue() + " -> "+ p.isReferenced());
+				p.addLeftCount(p.getReferencedInt());
+				//System.out.println("Referencia -> "+ p.getValue() + " -> "+ p.getCount());
 				p.setReferenced(false);
 			}
 		}
-		p = null;
 	}
 }

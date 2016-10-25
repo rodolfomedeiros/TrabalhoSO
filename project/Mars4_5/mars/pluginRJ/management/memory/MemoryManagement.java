@@ -30,29 +30,33 @@ public class MemoryManagement implements Observer{
 	
 	// **************** ***************** ******************
 	
-	/**
+	/*
 	 * Tabela de paginas
 	 */
 	private PageTable pageTable;
-	/**
+	/*
 	 * Tabela de processos mapeados
 	 */
 	private Vector<String> processMap;
-	/**
+	/*
 	 * Quantidade de processos que podem ser mapeados.
 	 */
 	private int sizeProcess;
-	/**
+	/*
 	 * Processo que está sendo executado!
 	 */
 	private String executeProcessPid;
-	/**
+	/*
 	 * Índice do último processo executado;
 	 */
 	private int lastIndexProcessMap;
-	
+	/*
+	 * Controle de modificação do pc
+	 */
 	private int pcBefore;
-	
+	/*
+	 * Relogio
+	 */
 	private int timeReset;
 	
 	public MemoryManagement(AlgorithmType type){
@@ -83,9 +87,7 @@ public class MemoryManagement implements Observer{
 			case NRU:
 				this.pageTable = new PageTableNRU();
 			case LRU:
-				//this.pageTable = new PageTableLRU();
-			default: 
-				this.pageTable = new PageTableFIFO();
+				this.pageTable = new PageTableLRU();
 		}
 	}
 	
@@ -138,17 +140,19 @@ public class MemoryManagement implements Observer{
 			Register pc = (Register) o;
 			RegisterAccessNotice notice = (RegisterAccessNotice) arg;
 			
+			
+			
 			if(notice.getAccessType() == AccessNotice.WRITE && executeProcessPid != null && pcBefore != pc.getValueNoNotify()){
 				System.out.println("Valor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
-				SystemIO.printString("\nValor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
-				System.out.println("index mapeado = "+ getIndexProcessMap());
+				//SystemIO.printString("\nValor do pc(update) = "+pc.getValueNoNotify() + " processo exec = "+ executeProcessPid);
+				//System.out.println("index mapeado = "+ getIndexProcessMap());
 				pcBefore = pc.getValueNoNotify();
 				pageTable.checkPageMap(getIndexProcessMap(), pc.getValueNoNotify());
-				
-				if(++timeReset > 3){
-					resetReferenceTable();
-					timeReset = 0;
-				}
+			}
+			
+			if(++timeReset > 3){
+				pageTable.resetReferenceTable();
+				timeReset = 0;
 			}
 	}
 	
@@ -163,18 +167,5 @@ public class MemoryManagement implements Observer{
 				}
 			}
 		}
-	}
-	
-	private void resetReferenceTable(){
-		Page p;
-		for(int i = 0; i < pageTable.getSizeTable(); i++){
-			p = pageTable.getTable().get(i);
-			
-			if(p.isPresent()){
-				System.out.println("Referencia -> "+ p.getValue() + " -> "+ p.isReferenced());
-				p.setReferenced(false);
-			}
-		}
-		p = null;
 	}
 }

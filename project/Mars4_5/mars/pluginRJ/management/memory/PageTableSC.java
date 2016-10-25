@@ -1,7 +1,10 @@
 package mars.pluginRJ.management.memory;
 
 public class PageTableSC extends PageTable{
-
+	public PageTableSC() {
+		super();
+	}
+	
 	@Override
 	public void checkPageMap(int indexProcessMap, int address) {
 		int index = indexProcessMap * getSizePageProcess();
@@ -43,17 +46,14 @@ public class PageTableSC extends PageTable{
 						
 						p = table.get(option.get(indexProcessMap).getIndexPage());
 					}else{
-						p.setValue(address);
-						p.setPresent(true);
-						p.setReferenced(true);
 						break;
 					}
 				}
-			}else{
-				p.setValue(address);
-				p.setPresent(true);
-				p.setReferenced(true);
 			}
+			
+			p.setValue(address);
+			p.setPresent(true);
+			p.setReferenced(true);
 			
 			setIndexMap(option.get(indexProcessMap).getIndexPage());
 			setIndexProcess(indexProcessMap);
@@ -67,5 +67,19 @@ public class PageTableSC extends PageTable{
 		
 		//informa aos observers
 		setTableChanged();
+	}
+	
+	@Override
+	protected void resetReferenceTable(){
+		Page p;
+		for(int i = 0; i < table.size(); i++){
+			p = table.get(i);
+			
+			if(p.isPresent()){
+				System.out.println("Referencia -> "+ p.getValue() + " -> "+ p.isReferenced());
+				p.setReferenced(false);
+			}
+		}
+		p = null;
 	}
 }

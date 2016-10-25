@@ -9,12 +9,12 @@ public abstract class PageTable extends Observable{
 	private final int sizePageProcess = 4;
 	protected Vector<Page> table;
 	protected boolean pageFault;
+	//index selecionado da tabela
 	protected int indexMap;
+	// index de processo(usado pela tabela de resultado)
 	protected int indexProcess;
 	/*
-	 * dependencias
-	 * 
-	 * colunm 0 -> endereço da pagina que deve ser modificada.
+	 * Dados nenecessários para resultados e algoritmos
 	 */
 	protected Vector<Option> option;
 	
@@ -79,4 +79,6 @@ public abstract class PageTable extends Observable{
 		setChanged();
 		notifyObservers();
 	}
+	
+	protected abstract void resetReferenceTable();
 }
